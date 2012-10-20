@@ -4,20 +4,22 @@ java_package 'net.rhnh'
 
 java_import 'com.google.inject.Provides'
 java_import 'com.google.inject.Binder'
+java_import 'com.google.inject.AbstractModule'
 
 # Normally modules are pretty simple so you may as well just implement them in
 # Java.  This shows that you don't have to though.
-class ComplexModule
+class ComplexModule < AbstractModule
   # Don't java_import Module, it conflicts with a JRuby class of the same name.
   java_implements 'com.google.inject.Module'
 
-  # Implementing the Module interface. I haven't figured out how to get
-  # inheritance from AbstractModule to work yet.
   java_signature 'void configure(Binder binder)'
   def configure(binder)
-    binder.
-      bind(java::SimpleLogger.java_class).
-      to(java::PrefixLogger.java_class)
+    super
+  end
+
+  java_signature 'protected void configure()'
+  def configure_override
+    bind(java::SimpleLogger.java_class).to(java::PrefixLogger.java_class)
   end
 
   # This is superfluous since Guice wires up concrete classes automatically,
