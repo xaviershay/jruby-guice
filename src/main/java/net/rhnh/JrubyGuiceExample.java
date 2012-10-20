@@ -1,9 +1,7 @@
 package net.rhnh;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Provides;
 
 public class JrubyGuiceExample {
   public static void main(String[] args) {
@@ -18,18 +16,7 @@ public class JrubyGuiceExample {
   }
 
   public static void complexExample() {
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override protected void configure() {
-        bind(SimpleLogger.class).to(PrefixLogger.class);
-      }
-
-      // This is extraneous, but demonstrates how you could do
-      // complex setup on objects.
-      @Provides
-      BareLogger provideBareLogger() {
-        return new BareLogger();
-      }
-    });
+    Injector injector = Guice.createInjector(new ComplexModule());
     ComplexApp app = injector.getInstance(ComplexApp.class);
     app.run();
   }
