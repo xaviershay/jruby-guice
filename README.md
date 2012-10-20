@@ -18,4 +18,10 @@ before running the project.
 
 Start reading in `src/main/java/net/rhnh/JrubyGuiceExample.java` and `src/main/ruby/SimplestApp.rb`.
 
+Why
+---
+
+Perhaps you are integrating Ruby into an existing Java framework. Standalone,
+this is a terrible idea.
+
 [1]: http://code.google.com/p/google-guice/
