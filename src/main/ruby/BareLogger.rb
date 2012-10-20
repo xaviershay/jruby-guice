@@ -2,8 +2,8 @@ require 'java'
 
 java_package 'net.rhnh'
 
-class MyLogger
+class BareLogger
   def info(msg)
-    puts "[INFO] %s" % msg
+    puts msg
   end
 end
